@@ -46,6 +46,12 @@
     <h2>Our Services & Pricing</h2>
     <ul>
       <li>
+        <div class="service-icon"><i class="fas fa-car"></i></div>
+        <strong>Exterior Wash</strong>
+        <p>Shampoo wash, hand wash, clean exterior glass, clean & shine tires/wheels, and wax.</p>
+        <p>$40 (Sedan/Coupe) | $50 (SUV/Truck) <br /><em>~40 minutes</em></p>
+      </li>
+      <li>
         <div class="service-icon"><i class="fas fa-broom"></i></div>
         <strong>Maintenance Interior & Exterior Detail</strong>
         <p>Vacuum, interior dust/clean, clean doorjambs, exterior wash, and wax.</p>
@@ -76,13 +82,6 @@
     </ul>
   </section>
 
-  <!-- New Contact Info Section -->
-  <section id="contact-info" class="section">
-    <h2>Contact Information</h2>
-    <p><strong>Phone:</strong> <a href="tel:+14013551686">401-355-1686</a></p>
-    <p><strong>Email:</strong> <a href="mailto:tdddetails@gmail.com">tdddetails@gmail.com</a></p>
-  </section>
-
   <section class="section" id="contact">
     <form class="vehicle-selection-form" style="margin-bottom: 2rem;">
       <h3>Select Your Vehicle Type</h3>
@@ -100,12 +99,18 @@
       </label>
       <p><em>* Prices may vary depending on your selection and vehicle condition.</em></p>
     </form>
+
+    <div class="contact-info" style="text-align:center; margin-bottom: 2rem;">
+      <p>📞 Phone: <a href="tel:4013551686">401-355-1686</a></p>
+      <p>✉️ Email: <a href="mailto:tdddetails@gmail.com">tdddetails@gmail.com</a></p>
+    </div>
+
     <h2>Book Your Appointment</h2>
     <div class="calendly-container">
       <div
         class="calendly-inline-widget"
         data-url="https://calendly.com/tdddetails"
-        style="min-width:320px; height:630px"
+        style="min-width:320px; height:630px;"
       ></div>
     </div>
     <p class="calendar-note">Live availability shown - we come to you in Rhode Island!</p>
@@ -115,8 +120,8 @@
     <div class="footer-content">
       <div class="footer-section">
         <h3>Contact Us</h3>
-        <p>Phone: <a href="tel:+14013551686">401-355-1686</a></p>
-        <p>Email: <a href="mailto:tdddetails@gmail.com">tdddetails@gmail.com</a></p>
+        <p>Phone: <a href="tel:4013551686" style="color:inherit; text-decoration:underline;">401-355-1686</a></p>
+        <p>Email: <a href="mailto:tdddetails@gmail.com" style="color:inherit; text-decoration:underline;">tdddetails@gmail.com</a></p>
       </div>
       <div class="footer-section">
         <h3>Service Area</h3>
@@ -145,5 +150,29 @@
 
   <!-- Scripts -->
   <script src="js/scripts.js"></script>
+  <script>
+    // Mobile menu toggle
+    document.getElementById('menuBtn').addEventListener('click', function () {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+    });
+
+    // Vehicle size selection changes Calendly URL
+    document.querySelectorAll('input[name="vehicleSize"]').forEach((radio) => {
+      radio.addEventListener('change', function () {
+        const selectedSize = this.value;
+        const widget = document.querySelector('.calendly-inline-widget');
+        const newUrl = `https://calendly.com/tdddetails?hide_event_type_details=1&vehicle=${encodeURIComponent(
+          selectedSize
+        )}`;
+        widget.setAttribute('data-url', newUrl);
+        if (typeof Calendly !== 'undefined') {
+          Calendly.initInlineWidget({ url: newUrl, parentElement: widget });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
