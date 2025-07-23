@@ -1,317 +1,333 @@
-/* ================ */
-/* CSS Variables */
-/* ================ */
-:root {
-  --primary: #111;
-  --secondary: #d4af37;
-  --text: #333;
-  --light: #f9f9f9;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>T&D Details | Mobile Auto Detailing in RI</title>
+  <meta name="description" content="T&D Details provides mobile auto detailing throughout Rhode Island. Interior, exterior, and maintenance services with easy online booking." />
 
-/* ================ */
-/* Base Styles */
-/* ================ */
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: var(--light);
-  color: var(--text);
-  line-height: 1.6;
-}
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet" />
 
-/* ================ */
-/* Header */
-/* ================ */
-header {
-  background-color: var(--primary);
-  color: white;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
-.logo-container {
-  height: 60px;
-}
+  <style>
+    /* ================ */
+    /* CSS Variables */
+    /* ================ */
+    :root {
+      --primary: #111;
+      --secondary: #d4af37;
+      --text: #333;
+      --light: #f9f9f9;
+      --animation-duration: 0.8s;
+      --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-.logo {
-  height: 100%;
-  width: auto;
-  max-width: 180px;
-  transition: transform 0.3s ease;
-}
+    /* ================ */
+    /* Base Styles */
+    /* ================ */
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 0.3s;
+    }
 
-.logo:hover {
-  transform: scale(1.05);
-}
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
 
-nav {
-  display: flex;
-  gap: 1.5rem;
-}
+    @keyframes slideUpFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s;
-}
+    /* Fade + slide-up animation for sections */
+    .section, .hero {
+      opacity: 0;
+      animation: slideUpFadeIn var(--animation-duration) var(--animation-easing) forwards;
+    }
 
-nav a:hover {
-  color: var(--secondary);
-}
+    .section:nth-of-type(1) {
+      animation-delay: 0.4s;
+    }
+    .section:nth-of-type(2) {
+      animation-delay: 0.6s;
+    }
+    .hero {
+      animation-delay: 0.2s;
+    }
 
-.mobile-menu-btn {
-  display: none;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
+    /* ================ */
+    /* Header */
+    /* ================ */
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: slideUpFadeIn 0.7s var(--animation-easing) forwards;
+    }
 
-/* ================ */
-/* Hero Section */
-/* ================ */
-.hero {
-  text-align: center;
-  padding: 5rem 1rem;
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-              url('https://images.unsplash.com/photo-1602332250027-b7c2d5e190ab') center/cover no-repeat;
-  color: white;
-}
+    .logo-container {
+      height: 60px;
+    }
 
-.hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
+    .logo {
+      height: 100%;
+      max-width: 180px;
+      width: auto;
+      transition: transform 0.3s ease;
+    }
 
-.hero p {
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin: 0 auto 2rem;
-}
+    .logo:hover {
+      transform: scale(1.05);
+    }
 
-.cta-button {
-  background-color: var(--secondary);
-  color: var(--primary);
-  padding: 0.8rem 2rem;
-  border: none;
-  border-radius: 4px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s;
-}
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
 
-.cta-button:hover {
-  background-color: white;
-  transform: translateY(-2px);
-}
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
 
-/* ================ */
-/* Services Section */
-/* ================ */
-.section {
-  padding: 3rem 1rem;
-  max-width: 900px;
-  margin: 0 auto;
-}
+    nav a:hover,
+    nav a:focus {
+      color: var(--secondary);
+      outline: none;
+    }
 
-.section h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  position: relative;
-}
+    /* Hidden checkbox for menu toggle */
+    .menu-toggle {
+      display: none;
+    }
 
-.section h2::after {
-  content: '';
-  display: block;
-  width: 80px;
-  height: 3px;
-  background: var(--secondary);
-  margin: 0.5rem auto 0;
-}
+    /* Mobile menu button */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
 
-.services ul {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
+    /* ================ */
+    /* Hero Section */
+    /* ================ */
+    .hero {
+      text-align: center;
+      padding: 5rem 1rem;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                  url('https://images.unsplash.com/photo-1602332250027-b7c2d5e190ab') center/cover no-repeat;
+      color: white;
+    }
 
-.services li {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
-}
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+      letter-spacing: 0.03em;
+    }
 
-.services li:hover {
-  transform: translateY(-5px);
-}
+    .hero p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      color: white;
+    }
 
-.services li strong {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-  color: var(--primary);
-}
+    /* ================ */
+    /* Buttons */
+    /* ================ */
+    .cta-button {
+      background-color: var(--secondary);
+      color: var(--primary);
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 4px 8px rgba(212, 175, 55, 0.4);
+    }
 
-.services li p {
-  margin: 0.5rem 0;
-}
+    .cta-button:hover,
+    .cta-button:focus {
+      background-color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(212, 175, 55, 0.6);
+      animation: pulseGlow 1.5s infinite alternate;
+      outline: none;
+    }
 
-.services li em {
-  color: #666;
-  font-size: 0.9rem;
-}
+    @keyframes pulseGlow {
+      from {
+        box-shadow: 0 8px 16px rgba(212, 175, 55, 0.6);
+      }
+      to {
+        box-shadow: 0 12px 24px rgba(212, 175, 55, 0.9);
+      }
+    }
 
-.service-icon {
-  font-size: 1.5rem;
-  color: var(--secondary);
-  margin-bottom: 0.5rem;
-}
+    /* ================ */
+    /* Services Section */
+    /* ================ */
+    .section {
+      padding: 3rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
-.condition-note {
-  color: #666;
-  font-size: 0.8rem;
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
-  border-top: 1px dashed #ddd;
-}
+    .services li {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+      list-style: none;
+    }
 
-/* ================ */
-/* Calendly Booking */
-/* ================ */
-.calendly-container {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-  margin: 0 auto;
-  max-width: 900px;
-}
+    .services li:hover,
+    .services li:focus-within {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+      outline: none;
+    }
 
-.calendly-inline-widget {
-  border-radius: 8px;
-  overflow: hidden;
-}
+    /* Service icon pulse on hover */
+    .services li:hover .service-icon,
+    .services li:focus-within .service-icon {
+      animation: pulseGlow 1.2s infinite alternate;
+    }
 
-.calendar-note {
-  text-align: center;
-  color: #666;
-  font-size: 0.9rem;
-  margin-top: 1rem;
-}
+    .service-icon {
+      font-size: 1.5rem;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
 
-/* ================ */
-/* Footer */
-/* ================ */
-footer {
-  text-align: center;
-  padding: 3rem 1rem;
-  background-color: var(--primary);
-  color: white;
-}
+    /* ================ */
+    /* Footer */
+    /* ================ */
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      background-color: var(--primary);
+      color: white;
+      animation: slideUpFadeIn 0.7s var(--animation-easing) forwards;
+    }
 
-.footer-content {
-  max-width: 900px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  text-align: left;
-}
+    /* ================ */
+    /* Responsive */
+    /* ================ */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 1rem;
+      }
 
-.footer-section h3 {
-  color: var(--secondary);
-  margin-bottom: 1rem;
-}
+      nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+        gap: 1rem;
+      }
 
-.social-links {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-}
+      /* Show nav when checkbox is checked */
+      .menu-toggle:checked + .mobile-menu-btn + nav {
+        display: flex;
+      }
 
-.social-links a {
-  color: white;
-  font-size: 1.5rem;
-  transition: color 0.3s;
-}
+      .mobile-menu-btn {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="T&D Details Logo" class="logo" />
+    </div>
 
-.social-links a:hover {
-  color: var(--secondary);
-}
+    <!-- Hidden checkbox to toggle menu -->
+    <input type="checkbox" id="menu-toggle" class="menu-toggle" />
 
-.copyright {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
+    <!-- Label styled as hamburger button -->
+    <label for="menu-toggle" class="mobile-menu-btn" aria-label="Toggle navigation menu" role="button" tabindex="0">
+      <i class="fas fa-bars"></i>
+    </label>
 
-/* ================ */
-/* Mobile Styles */
-/* ================ */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    padding: 1rem;
-  }
-  
-  nav {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 1rem;
-  }
-  
-  nav.show {
-    display: flex;
-  }
-  
-  nav a {
-    margin: 0.5rem 0;
-    text-align: center;
-  }
-  
-  .mobile-menu-btn {
-    display: block;
-  }
-  
-  .logo-container {
-    height: 50px;
-  }
-  
-  .logo {
-    max-width: 150px;
-  }
-  
-  .hero {
-    padding: 3rem 1rem;
-  }
-  
-  .hero h1 {
-    font-size: 2rem;
-  }
-  
-  .services ul {
-    grid-template-columns: 1fr;
-  }
-  
-  .calendly-inline-widget {
-    height: 700px !important;
-  }
-  
-  .footer-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-}
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#booking">Book Now</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Welcome to T&D Details</h1>
+    <p>Your mobile auto detailing solution in Rhode Island — interior, exterior, and maintenance services, with easy online booking.</p>
+    <a href="#booking" class="cta-button">Book Your Service</a>
+  </section>
+
+  <section id="services" class="section services">
+    <h2>Our Services</h2>
+    <ul>
+      <li tabindex="0">
+        <span class="service-icon"><i class="fas fa-car-side"></i></span>
+        <strong>Interior Detailing</strong>
+        <p>Deep cleaning, vacuuming, and shampooing to restore your vehicle's interior.</p>
+      </li>
+      <li tabindex="0">
+        <span class="service-icon"><i class="fas fa-spray-can"></i></span>
+        <strong>Exterior Wash & Wax</strong>
+        <p>Protective waxing and hand wash for a brilliant shine.</p>
+      </li>
+      <li tabindex="0">
+        <span class="service-icon"><i class="fas fa-tools"></i></span>
+        <strong>Maintenance Services</strong>
+        <p>Oil changes, tire rotations, and basic upkeep to keep your car running smoothly.</p>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 T&D Details. All rights reserved.</p>
+  </footer>
+</body>
+</html>
