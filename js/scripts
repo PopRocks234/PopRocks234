@@ -1,98 +1,44 @@
-/**
- * T&D Details - Mobile Auto Detailing
- * Main JavaScript File
- */
-
-document.addEventListener('DOMContentLoaded', function() {
-  // ======================
-  // Mobile Navigation
-  // ======================
+document.addEventListener('DOMContentLoaded', () => {
+  // Mobile menu toggle
   const menuBtn = document.getElementById('menuBtn');
   const mainNav = document.getElementById('mainNav');
-  
+
   if (menuBtn && mainNav) {
-    menuBtn.addEventListener('click', function() {
+    menuBtn.addEventListener('click', () => {
       mainNav.classList.toggle('show');
-      this.setAttribute('aria-expanded', mainNav.classList.contains('show'));
+      const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', !expanded);
     });
-    
-    // Close menu when clicking on nav links
-    const navLinks = mainNav.querySelectorAll('a');
-    navLinks.forEach(link => {
+
+    mainNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        mainNav.classList.remove('show');
-        menuBtn.setAttribute('aria-expanded', 'false');
+        if (window.innerWidth <= 768) {
+          mainNav.classList.remove('show');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        }
       });
     });
   }
 
-  // ======================
-  // Smooth Scrolling
-  // ======================
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href');
-      const targetElement = document.querySelector(targetId);
-      
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+  // Calendly inline widget update based on vehicle size
+  const vehicleRadios = document.querySelectorAll('input[name="vehicleSize"]');
+  const calendlyWidget = document.querySelector('.calendly-inline-widget');
+
+  vehicleRadios.forEach(radio => {
+    radio.addEventListener('change', function () {
+      const selectedSize = this.value;
+      const baseUrl = 'https://calendly.com/tdddetails?hide_event_type_details=1';
+      const newUrl = `${baseUrl}&vehicle=${encodeURIComponent(selectedSize)}`;
+      calendlyWidget.setAttribute('data-url', newUrl);
+
+      if (window.Calendly) {
+        Calendly.initInlineWidget({
+          url: newUrl,
+          parentElement: calendlyWidget,
+          prefill: {},
+          utm: {},
         });
-        
-        // Update URL without page jump
-        if (history.pushState) {
-          history.pushState(null, null, targetId);
-        } else {
-          location.hash = targetId;
-        }
       }
     });
   });
-
-  // ======================
-  // Calendly Inline Widget & Vehicle Size Selector
-  // ======================
-  const sizeRadios = document.querySelectorAll('input[name="vehicleSize"]');
-  const widgetContainer = document.querySelector('.calendly-container');
-
-  function loadCalendlyWidget(vehicleSize) {
-    const url = `https://calendly.com/tdddetails?hide_event_type_details=1&vehicle=${encodeURIComponent(vehicleSize)}`;
-    // Clear existing widget
-    widgetContainer.innerHTML = `
-      <div class="calendly-inline-widget" 
-           data-url="${url}" 
-           style="min-width:320px;height:630px;"></div>
-    `;
-    if (typeof Calendly !== 'undefined') {
-      Calendly.initInlineWidgets();
-    } else {
-      console.warn('Calendly script not loaded');
-    }
-  }
-
-  if (sizeRadios.length > 0 && widgetContainer) {
-    // Load default on page load
-    const checkedRadio = document.querySelector('input[name="vehicleSize"]:checked');
-    loadCalendlyWidget(checkedRadio ? checkedRadio.value : 'Sedan/Coupe');
-
-    sizeRadios.forEach(radio => {
-      radio.addEventListener('change', function () {
-        loadCalendlyWidget(this.value);
-      });
-    });
-  }
-
-  // ======================
-  // Form Validation (if forms exist)
-  // ======================
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      // Add your form validation logic here
-      console.log('Form submitted');
-    });
-  }
 });
