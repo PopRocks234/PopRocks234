@@ -119,5 +119,8 @@
   
   <!-- Local JS -->
   <script src="js/scripts.js"></script>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/scripts.js"></script>
+ <button data-calendly-trigger>Book Now</button>
 </body>
 </html>
