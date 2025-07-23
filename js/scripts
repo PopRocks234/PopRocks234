@@ -52,35 +52,35 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ======================
-  // Calendly Integration
+  // Calendly Inline Widget & Vehicle Size Selector
   // ======================
-  function initCalendly() {
+  const sizeRadios = document.querySelectorAll('input[name="vehicleSize"]');
+  const widgetContainer = document.querySelector('.calendly-container');
+
+  function loadCalendlyWidget(vehicleSize) {
+    const url = `https://calendly.com/tdddetails?hide_event_type_details=1&vehicle=${encodeURIComponent(vehicleSize)}`;
+    // Clear existing widget
+    widgetContainer.innerHTML = `
+      <div class="calendly-inline-widget" 
+           data-url="${url}" 
+           style="min-width:320px;height:630px;"></div>
+    `;
     if (typeof Calendly !== 'undefined') {
-      Calendly.initPopupWidget({
-        url: 'https://calendly.com/tdddetails',
-        prefill: {
-          name: '',
-          email: '',
-          customAnswers: {
-            a1: 'Auto Detailing Service'
-          }
-        },
-        utm: {
-          utmSource: 'Website',
-          utmMedium: 'BookingWidget',
-          utmCampaign: 'T&DDetails'
-        }
-      });
+      Calendly.initInlineWidgets();
     } else {
       console.warn('Calendly script not loaded');
     }
   }
 
-  // Initialize Calendly buttons if they exist
-  const calendlyButtons = document.querySelectorAll('[data-calendly-trigger]');
-  if (calendlyButtons.length > 0) {
-    calendlyButtons.forEach(button => {
-      button.addEventListener('click', initCalendly);
+  if (sizeRadios.length > 0 && widgetContainer) {
+    // Load default on page load
+    const checkedRadio = document.querySelector('input[name="vehicleSize"]:checked');
+    loadCalendlyWidget(checkedRadio ? checkedRadio.value : 'Sedan/Coupe');
+
+    sizeRadios.forEach(radio => {
+      radio.addEventListener('change', function () {
+        loadCalendlyWidget(this.value);
+      });
     });
   }
 
