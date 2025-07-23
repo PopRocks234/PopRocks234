@@ -3,25 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="T&D Details provides mobile auto detailing throughout Rhode Island. Interior, exterior, and maintenance services with easy online booking.">
   <title>T&D Details | Mobile Auto Detailing in RI</title>
+
+  <!-- Fonts and Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header>
     <div class="logo-container">
       <a href="#">
-        <img src="images/logo.png" alt="T&D Details Logo" class="logo">
+        <img src="images/logo.png" alt="T&D Details Logo" class="logo" loading="lazy">
       </a>
     </div>
-    <button class="mobile-menu-btn" id="menuBtn">
+    <button class="mobile-menu-btn" id="menuBtn" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="mainNav">
       <i class="fas fa-bars"></i>
     </button>
     <nav id="mainNav">
       <a href="#services">Services</a>
       <a href="#contact">Book Now</a>
-      <a href="https://www.instagram.com/tddetailss" target="_blank">Instagram</a>
+      <a href="https://www.instagram.com/tddetailss" target="_blank" rel="noopener">Instagram</a>
     </nav>
   </header>
 
@@ -35,35 +40,21 @@
     <h2>Our Services & Pricing</h2>
     <ul>
       <li>
-        <div class="service-icon">
-          <i class="fas fa-car"></i>
-        </div>
-        <strong>Exterior Wash</strong>
-        <p>Shampoo wash, hand wash, clean exterior glass, clean & shine tires/wheels, and wax.</p>
-        <p>$40 (Sedan/Coupe) | $50 (SUV/Truck) <br><em>~40 minutes</em></p>
-      </li>
-      <li>
-        <div class="service-icon">
-          <i class="fas fa-broom"></i>
-        </div>
+        <div class="service-icon"><i class="fas fa-broom"></i></div>
         <strong>Maintenance Interior & Exterior Detail</strong>
         <p>Vacuum, interior dust/clean, clean doorjambs, exterior wash, and wax.</p>
         <p>$85 (Sedan/Coupe) | $95 (SUV) | $105 (Large SUV/Truck) <br><em>~1 hour</em></p>
         <p class="condition-note"><em>*Pricing based on average condition. Additional charges may apply for pet hair, excessive trash/dirt. Final price adjusted upon inspection.</em></p>
       </li>
       <li>
-        <div class="service-icon">
-          <i class="fas fa-vacuum"></i>
-        </div>
+        <div class="service-icon"><i class="fas fa-vacuum"></i></div>
         <strong>Full Interior Detail</strong>
         <p>Deep steam vacuum, full wipe down, clean windows, clean seats, wash & clean rubber mats, clean doorjambs.</p>
         <p>$85 (Sedan/Coupe) | $90 (SUV) | $100 (Large SUV/Truck) <br><em>~1 hour</em></p>
         <p class="condition-note"><em>*Pricing based on average condition. Additional charges may apply for pet hair, excessive trash/dirt. Final price adjusted upon inspection.</em></p>
       </li>
       <li>
-        <div class="service-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
+        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
         <strong>Wash / Clay / Protection</strong>
         <p>Exterior wash, decontaminate paint, apply sealant, clean & shine tires, clean doors.</p>
         <p>$100 (Sedan/Coupe) | $120 (SUV) | $135 (Large SUV/Truck)</p>
@@ -72,6 +63,22 @@
   </section>
 
   <section class="section" id="contact">
+    <form class="vehicle-selection-form" style="margin-bottom: 2rem;">
+      <h3>Select Your Vehicle Type</h3>
+      <label>
+        <input type="radio" name="vehicleSize" value="Sedan/Coupe" checked>
+        Sedan/Coupe
+      </label>
+      <label>
+        <input type="radio" name="vehicleSize" value="SUV">
+        SUV
+      </label>
+      <label>
+        <input type="radio" name="vehicleSize" value="Large SUV/Truck">
+        Large SUV/Truck
+      </label>
+      <p><em>* Prices may vary depending on your selection and vehicle condition.</em></p>
+    </form>
     <h2>Book Your Appointment</h2>
     <div class="calendly-container">
       <div class="calendly-inline-widget" 
@@ -96,15 +103,9 @@
       <div class="footer-section">
         <h3>Follow Us</h3>
         <div class="social-links">
-          <a href="https://www.instagram.com/tddetailss" target="_blank" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="#" target="_blank" aria-label="Facebook">
-            <i class="fab fa-facebook"></i>
-          </a>
-          <a href="#" target="_blank" aria-label="Twitter">
-            <i class="fab fa-twitter"></i>
-          </a>
+          <a href="https://www.instagram.com/tddetailss" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
     </div>
@@ -113,14 +114,30 @@
     </div>
   </footer>
 
-  <!-- Calendly Embed Script -->
+  <!-- Calendly Script -->
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-  
-  <!-- Local JS -->
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+  <!-- Scripts -->
   <script src="js/scripts.js"></script>
-  <link rel="stylesheet" href="css/styles.css">
-  <script src="js/scripts.js"></script>
- <button data-calendly-trigger>Book Now</button>
+  <script>
+    // Mobile menu toggle
+    document.getElementById('menuBtn').addEventListener('click', function () {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('show');
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+    });
+  // Auto-select Calendly link with vehicle size
+    document.querySelectorAll('input[name="vehicleSize"]').forEach(radio => {
+      radio.addEventListener('change', function () {
+        const selectedSize = this.value;
+        const widget = document.querySelector('.calendly-inline-widget');
+        const newUrl = `https://calendly.com/tdddetails?hide_event_type_details=1&vehicle=${encodeURIComponent(selectedSize)}`;
+        widget.setAttribute('data-url', newUrl);
+        Calendly.initInlineWidget({ url: newUrl, parentElement: widget });
+      });
+    });
+  </script>
 </body>
 </html>
